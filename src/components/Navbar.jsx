@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { account } from "../lib/appwrite";
 
-const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal }) => {
+const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal, userPlan = "Free" }) => {
   const [authLoading, setAuthLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,13 +31,19 @@ const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal })
           <img
             src="/tangent_logo.png"
             alt="Tangent Logo"
+            width="40"
+            height="40"
             className="w-10 h-10 rounded-xl shadow-lg shadow-pink-500/20 border border-white/10 object-cover"
           />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-lg tracking-tight text-white">Tangent</span>
-              <span className="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-pink-500/15 text-pink-400 border border-pink-500/30 rounded-full">
-                Platform
+              <span className={`px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase rounded-full border ${
+                userPlan === "Pro" || userPlan === "Agency"
+                  ? "bg-amber-500/15 text-amber-400 border-amber-500/30"
+                  : "bg-pink-500/15 text-pink-400 border-pink-500/30"
+              }`}>
+                {userPlan === "Pro" ? "Pro ⚡" : userPlan === "Agency" ? "Agency 🚀" : "Free Plan"}
               </span>
             </div>
             <span className="text-xs text-slate-400 font-medium">Invoicing & Financial Hub</span>
@@ -45,8 +51,8 @@ const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal })
         </Link>
 
         {/* Center Nav Links */}
-        {currentUser && (
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          {currentUser && (
             <Link
               to="/"
               className={`transition-colors ${
@@ -55,6 +61,16 @@ const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal })
             >
               Dashboard
             </Link>
+          )}
+          <Link
+            to="/pricing"
+            className={`transition-colors ${
+              location.pathname === "/pricing" ? "text-pink-400 font-bold" : "text-slate-300 hover:text-white"
+            }`}
+          >
+            Pricing & Plans
+          </Link>
+          {currentUser && (
             <Link
               to="/profile"
               className={`transition-colors ${
@@ -63,8 +79,8 @@ const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal })
             >
               Profile
             </Link>
-          </nav>
-        )}
+          )}
+        </nav>
 
         {/* Action Controls */}
         <div className="flex items-center gap-3">

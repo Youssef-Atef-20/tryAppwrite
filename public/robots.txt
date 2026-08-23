@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://try-appwrite.vercel.app/sitemap.xml

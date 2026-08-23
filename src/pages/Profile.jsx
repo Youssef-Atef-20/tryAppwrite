@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { account } from "../lib/appwrite";
 
-const Profile = ({ currentUser, setCurrentUser }) => {
+const Profile = ({ currentUser, setCurrentUser, userPlan = "Free" }) => {
   const [name, setName] = useState(currentUser?.name || "");
   const [updating, setUpdating] = useState(false);
   const [message, setMessage] = useState("");
@@ -44,10 +45,10 @@ const Profile = ({ currentUser, setCurrentUser }) => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-white tracking-tight">
-          User Profile
+          User Profile & Settings
         </h1>
         <p className="text-sm text-slate-400 mt-1">
-          Manage your account credentials, security settings, and session status
+          Manage your account credentials, subscription plan, and security settings
         </p>
       </div>
 
@@ -66,8 +67,12 @@ const Profile = ({ currentUser, setCurrentUser }) => {
             {currentUser.email || "No email"}
           </p>
 
-          <span className="inline-block px-3 py-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold">
+          <span className="inline-block px-3 py-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold mb-2">
             {currentUser.emailVerification ? "Verified Account" : "Authenticated Session"}
+          </span>
+
+          <span className="inline-block px-3 py-1 bg-pink-500/15 text-pink-400 border border-pink-500/30 rounded-full text-xs font-bold uppercase tracking-wider">
+            {userPlan} Plan Member
           </span>
 
           <button
@@ -78,9 +83,36 @@ const Profile = ({ currentUser, setCurrentUser }) => {
           </button>
         </div>
 
-        {/* Right Column: Profile Details & Forms */}
+        {/* Right Column: Profile Details & Subscription */}
         <div className="md:col-span-2 space-y-6">
           
+          {/* Subscription Card */}
+          <div className="glass-panel rounded-3xl p-6 border border-pink-500/20 bg-gradient-to-br from-pink-500/10 to-rose-500/5">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <span className="text-xs font-semibold text-pink-400 uppercase tracking-wider block mb-1">
+                  Active Subscription
+                </span>
+                <h3 className="text-xl font-extrabold text-white">
+                  {userPlan} Tier
+                </h3>
+              </div>
+
+              <Link
+                to="/pricing"
+                className="btn-primary text-xs px-4 py-2 shadow-lg shadow-pink-500/20"
+              >
+                {userPlan === "Free" ? "Upgrade Plan ⚡" : "Manage Subscription"}
+              </Link>
+            </div>
+
+            <p className="text-xs text-slate-300">
+              {userPlan === "Free"
+                ? "You are currently on the Free plan (limited to 5 invoices). Upgrade to Pro for unlimited invoices, PDF exports, and multi-currency billing."
+                : `You enjoy unlimited invoicing, custom branding, and priority support as a ${userPlan} subscriber.`}
+            </p>
+          </div>
+
           {/* Account Details Card */}
           <div className="glass-panel rounded-3xl p-6 border border-white/10">
             <h3 className="text-lg font-bold text-white mb-4 pb-3 border-b border-white/10 flex items-center gap-2">
