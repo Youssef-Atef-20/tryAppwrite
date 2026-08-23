@@ -1,0 +1,154 @@
+import React from "react";
+
+const InvoicePreviewModal = ({ invoice, isOpen, onClose }) => {
+  if (!isOpen || !invoice) return null;
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const getCurrencySymbol = (curr) => {
+    switch (curr) {
+      case "EUR": return "€";
+      case "EGP": return "E£";
+      case "GBP": return "£";
+      default: return "$";
+    }
+  };
+
+  const currencySymbol = getCurrencySymbol(invoice.currency);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn">
+      <div className="glass-panel w-full max-w-2xl rounded-3xl p-6 sm:p-10 border border-white/20 shadow-2xl relative max-h-[92vh] overflow-y-auto bg-slate-950 text-white">
+        
+        {/* Top Control Bar */}
+        <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/10 print:hidden">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20">
+              INVOICE PREVIEW
+            </span>
+            <span className="text-xs text-slate-400 font-mono">{invoice.invoiceNumber}</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handlePrint}
+              className="btn-primary text-xs px-4 py-2 flex items-center gap-2"
+            >
+              <span>🖨️ Print / Save as PDF</span>
+            </button>
+            <button
+              onClick={onClose}
+              className="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        {/* Printable Document Sheet */}
+        <div className="space-y-8 p-4 sm:p-6 bg-slate-900/60 rounded-2xl border border-white/5">
+          
+          {/* Invoice Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-white/10">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-8 h-8 rounded-lg bg-pink-600 flex items-center justify-center font-bold text-white text-sm">
+                  a
+                </div>
+                <span className="text-xl font-extrabold tracking-tight">FREELANCE INVOICE</span>
+              </div>
+              <p className="text-xs text-slate-400">Powered by Appwrite Backend</p>
+            </div>
+
+            <div className="text-left sm:text-right font-mono">
+              <div className="text-xs text-slate-400">Invoice Number</div>
+              <div className="text-lg font-bold text-pink-400">{invoice.invoiceNumber}</div>
+              <div className="mt-1">
+                <span className={`inline-block text-[11px] font-bold px-2.5 py-0.5 rounded-full ${
+                  invoice.status === "Paid"
+                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                    : invoice.status === "Pending"
+                    ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                    : "bg-slate-800 text-slate-400"
+                }`}>
+                  {invoice.status.toUpperCase()}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Billing Info */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+            <div>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Billed To</span>
+              <div className="font-bold text-white text-base">{invoice.clientName}</div>
+              <div className="text-slate-300 text-xs font-mono mt-0.5">{invoice.clientEmail}</div>
+            </div>
+
+            <div className="sm:text-right">
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Dates</span>
+              <div className="text-xs text-slate-300">
+                <span className="text-slate-500">Issued:</span> {new Date(invoice.createdAt || Date.now()).toLocaleDateString()}
+              </div>
+              <div className="text-xs text-slate-300 mt-1">
+                <span className="text-slate-500">Due Date:</span> <span className="text-rose-400 font-semibold">{invoice.dueDate}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Line Items Table */}
+          <div className="rounded-xl overflow-hidden border border-white/10 bg-slate-950/80">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-900 border-b border-white/10 text-xs text-slate-400 font-mono uppercase">
+                <tr>
+                  <th className="px-4 py-3">Description / Service</th>
+                  <th className="px-4 py-3 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-slate-200">
+                <tr>
+                  <td className="px-4 py-4 font-medium">{invoice.projectTitle}</td>
+                  <td className="px-4 py-4 text-right font-mono font-bold text-white">
+                    {currencySymbol}{Number(invoice.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Totals */}
+          <div className="flex flex-col items-end pt-4 border-t border-white/10">
+            <div className="w-full sm:w-64 space-y-2 text-sm font-mono">
+              <div className="flex justify-between text-slate-400">
+                <span>Subtotal:</span>
+                <span>{currencySymbol}{Number(invoice.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              </div>
+              <div className="flex justify-between text-slate-400">
+                <span>Tax (0%):</span>
+                <span>{currencySymbol}0.00</span>
+              </div>
+              <div className="flex justify-between text-base font-bold text-white pt-2 border-t border-white/10">
+                <span>Total Due:</span>
+                <span className="text-pink-400">{currencySymbol}{Number(invoice.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Notes */}
+          {invoice.notes && (
+            <div className="p-3.5 bg-slate-950/50 rounded-xl border border-white/5 text-xs text-slate-400 font-sans">
+              <span className="font-semibold text-slate-300 block mb-1">Notes / Terms:</span>
+              {invoice.notes}
+            </div>
+          )}
+
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default InvoicePreviewModal;

@@ -91,8 +91,8 @@ const Hero = ({ currentUser, onExploreAuth }) => {
               <span className="text-purple-400">const</span> loginSIWG = () =&gt; &#123;<br />
               &nbsp;&nbsp;account.<span className="text-blue-300">createOAuth2Session</span>(<br />
               &nbsp;&nbsp;&nbsp;&nbsp;OAuthProvider.Google,<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-emerald-300">"http://localhost:5173"</span>,<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-emerald-300">"http://localhost:5173?error=true"</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-emerald-300">"https://try-appwrite.vercel.app/"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-emerald-300">"https://try-appwrite.vercel.app/?error=true"</span><br />
               &nbsp;&nbsp;);<br />
               &#125;;
             </code>
