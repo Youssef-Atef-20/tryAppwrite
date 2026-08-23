@@ -28,19 +28,19 @@ const Navbar = ({ currentUser, setCurrentUser, loadingUser, onOpenCreateModal })
         
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-600 via-rose-500 to-amber-500 p-[1px] shadow-lg shadow-pink-500/20">
-            <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center font-bold text-pink-500 text-xl">
-              <span className="pink-gradient-text font-black">a</span>
-            </div>
-          </div>
+          <img
+            src="/tangent_logo.png"
+            alt="Tangent Logo"
+            className="w-10 h-10 rounded-xl shadow-lg shadow-pink-500/20 border border-white/10 object-cover"
+          />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg tracking-tight text-white">FreelanceInvoicer</span>
+              <span className="font-extrabold text-lg tracking-tight text-white">Tangent</span>
               <span className="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-pink-500/15 text-pink-400 border border-pink-500/30 rounded-full">
-                Appwrite
+                Platform
               </span>
             </div>
-            <span className="text-xs text-slate-400 font-medium">Billing & Invoice Management</span>
+            <span className="text-xs text-slate-400 font-medium">Invoicing & Financial Hub</span>
           </div>
         </Link>
 

@@ -60,7 +60,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
           </div>
 
           <h2 className="text-xl font-bold text-white mb-1">
-            {currentUser.name || "Appwrite User"}
+            {currentUser.name || "Tangent User"}
           </h2>
           <p className="text-xs text-slate-400 font-mono mb-4">
             {currentUser.email || "No email"}
@@ -138,7 +138,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
 
               <div className="p-3.5 bg-slate-950/70 rounded-xl border border-white/5">
                 <span className="text-slate-500 block mb-1">Security Hashing:</span>
-                <span className="text-emerald-400 font-semibold">Argon2id / Bcrypt (Appwrite)</span>
+                <span className="text-emerald-400 font-semibold">Enterprise Argon2id / Bcrypt</span>
               </div>
 
               <div className="p-3.5 bg-slate-950/70 rounded-xl border border-white/5">

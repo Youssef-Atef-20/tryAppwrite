@@ -72,14 +72,14 @@ const SignUp = ({ setCurrentUser }) => {
         <div className="text-center mb-8">
           <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-tr from-pink-600 via-rose-500 to-amber-500 p-[1px] shadow-lg shadow-pink-500/20">
             <div className="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center font-bold text-pink-500 text-2xl">
-              <span className="pink-gradient-text font-black">a</span>
+              <span className="pink-gradient-text font-black">T</span>
             </div>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Create an Account
+            Create a Tangent Account
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Start managing your freelance invoices securely
+            Start managing your freelance invoices & billing securely
           </p>
         </div>
 
@@ -93,7 +93,7 @@ const SignUp = ({ setCurrentUser }) => {
         {/* Security Note */}
         <div className="mb-6 p-3 bg-pink-500/10 border border-pink-500/20 rounded-xl text-[11px] text-pink-300 flex items-center gap-2">
           <span>🔒</span>
-          <span>Passwords are encrypted & hashed securely with Argon2/Bcrypt by Appwrite.</span>
+          <span>Passwords are encrypted & hashed securely with enterprise Argon2id/Bcrypt.</span>
         </div>
 
         {/* Form */}

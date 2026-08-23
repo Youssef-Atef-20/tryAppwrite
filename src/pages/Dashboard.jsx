@@ -102,13 +102,13 @@ const Dashboard = ({ currentUser }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-semibold uppercase tracking-wider mb-2">
-            Personal Dashboard
+            Tangent Workspace
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Welcome back, {currentUser?.name || "Freelancer"}!
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Manage your personal invoices, monitor client payments, and sync with Appwrite
+            Manage your personal invoices, monitor client payments, and track revenue analytics
           </p>
         </div>
 
@@ -153,8 +153,7 @@ const Dashboard = ({ currentUser }) => {
         onOpenCreateModal={() => setIsCreateModalOpen(true)}
       />
 
-      {/* Appwrite Database Setup Guide */}
-      <AppwriteDbGuide />
+
 
       {/* Modals */}
       <CreateInvoiceModal

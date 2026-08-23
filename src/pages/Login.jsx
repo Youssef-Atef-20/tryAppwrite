@@ -26,7 +26,7 @@ const Login = ({ setCurrentUser }) => {
     } catch (err) {
       console.error("Login Error:", err);
       setError(err.message || "Failed to log in. Please check your credentials.");
-    } fontFinally: {
+    } finally {
       setLoading(false);
     }
   };
@@ -55,16 +55,16 @@ const Login = ({ setCurrentUser }) => {
         
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-tr from-pink-600 via-rose-500 to-amber-500 p-[1px] shadow-lg shadow-pink-500/20">
-            <div className="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center font-bold text-pink-500 text-2xl">
-              <span className="pink-gradient-text font-black">a</span>
-            </div>
-          </div>
+          <img
+            src="/tangent_logo.png"
+            alt="Tangent Logo"
+            className="w-16 h-16 rounded-2xl shadow-xl shadow-pink-500/30 border border-white/10 object-cover mx-auto mb-3"
+          />
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Welcome Back
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Sign in to access your Freelance Invoices & Billing
+            Sign in to access your Tangent Invoices & Billing
           </p>
         </div>
 

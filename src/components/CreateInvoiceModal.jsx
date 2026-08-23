@@ -114,7 +114,7 @@ const CreateInvoiceModal = ({ isOpen, onClose, onCreateInvoice }) => {
               required
               value={projectTitle}
               onChange={(e) => setProjectTitle(e.target.value)}
-              placeholder="e.g. Full-Stack Web Development & Appwrite Backend"
+              placeholder="e.g. Full-Stack Web Development & API Integration"
               className="glass-input w-full px-3.5 py-2.5 rounded-xl text-sm placeholder-slate-500"
             />
           </div>
