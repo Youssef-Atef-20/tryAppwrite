@@ -125,7 +125,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
               <div className="p-3.5 bg-slate-950/70 rounded-xl border border-white/5">
-                <span className="text-slate-500 block mb-1">User ID ($id):</span>
+                <span className="text-slate-500 block mb-1">User ID:</span>
                 <span className="text-pink-400 font-bold">{currentUser.$id}</span>
               </div>
 
